@@ -3,10 +3,11 @@ package controllers
 import (
 	"fmt"
 	"io"
-	"mime/multipart"
 	"net/http"
 	"os"
 	"path/filepath"
+
+	"github.com/google/uuid"
 )
 
 type FileController struct{}
@@ -23,31 +24,24 @@ func (fc *FileController) Upload(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	file, _, err := r.FormFile("file")
+	file, fileHeader, err := r.FormFile("file")
 	if err != nil {
 		http.Error(w, "Unable to get file", http.StatusBadRequest)
 		return
 	}
-	defer func(file multipart.File) {
-		err := file.Close()
-		if err != nil {
+	defer file.Close()
 
-		}
-	}(file)
-
-	dst, err := os.Create(filepath.Join("uploads", "uploaded_file"))
+	fileName := uuid.New().String()
+	fileExt := filepath.Ext(fileHeader.Filename)
+	filePath := "./uploadedfiles/" + fileName + fileExt
+	outFile, err := os.Create(filePath)
 	if err != nil {
 		http.Error(w, "Unable to create file", http.StatusInternalServerError)
 		return
 	}
-	defer func(dst *os.File) {
-		err := dst.Close()
-		if err != nil {
+	defer outFile.Close()
 
-		}
-	}(dst)
-
-	_, err = io.Copy(dst, file)
+	_, err = io.Copy(outFile, file)
 	if err != nil {
 		http.Error(w, "Error saving file", http.StatusInternalServerError)
 		return

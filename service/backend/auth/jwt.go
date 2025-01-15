@@ -36,6 +36,11 @@ func ValidateJWT(w http.ResponseWriter, r *http.Request) (*twj.Token, error) {
 		return nil, fmt.Errorf("missing token")
 	}
 
+	// Remove the "Bearer " prefix if it exists
+	if len(tokenString) > 7 && tokenString[:7] == "Bearer " {
+		tokenString = tokenString[7:]
+	}
+
 	token, err := twj.ParseWithClaims(tokenString, &Claims{}, func(token *twj.Token) (interface{}, error) {
 		_, ok := token.Method.(*twj.SigningMethodHMAC)
 		if !ok {

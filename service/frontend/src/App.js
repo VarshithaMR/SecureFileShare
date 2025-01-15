@@ -36,21 +36,21 @@ function App() {
             localStorage.setItem("authToken", response.data.token);
             console.log("Login successful, JWT token : ", response.data.token)
         } catch (error) {
-            console.error('MFA Validation failed', error);
+            console.error("MFA Validation failed", error)
         }
     }
 
     const handleFileUpload = async () => {
         const formData = new FormData();
-        formData.append('file', file);
+        formData.append("file", file)
 
         try {
-            await axios.post('http://localhost:8080/upload', formData, {
+            await axios.post('/upload', formData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                 }
             });
-            alert('File uploaded successfully!');
+            console.log("File uploaded successfully!")
         } catch (error) {
             console.error('File upload failed', error)
         }
@@ -79,7 +79,7 @@ function App() {
 
             {isLoggedIn && isCodeGenerated  &&(
                 <div>
-                    <Inputs input={file} type={"file"} onchangeEvent={(e) => setFile(e.target.files[0])}/>
+                    <Inputs type={"file"} onchangeEvent={(e) => setFile(e.target.files[0])}/>
                     <Button name={"Upload File"} onClick={handleFileUpload}/>
                 </div>
             )}

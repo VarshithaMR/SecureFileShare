@@ -39,7 +39,7 @@ func (fc *FileController) Upload(w http.ResponseWriter, r *http.Request) {
 
 	fileName := uuid.New().String()
 	fileExt := filepath.Ext(fileHeader.Filename)
-	filePath := "./uploadedfiles/" + fileName + fileExt
+	filePath := "./uploadedfiles/files/" + fileName + fileExt
 	outFile, err := os.Create(filePath)
 	if err != nil {
 		http.Error(w, "Unable to create file", http.StatusInternalServerError)
@@ -126,4 +126,17 @@ func (fc *FileController) ShowFiles(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Unable to encode the records", http.StatusInternalServerError)
 		return
 	}
+}
+
+func (fc *FileController) Download(w http.ResponseWriter, r *http.Request) {
+	filename := r.URL.Query().Get("filename")
+	filePath := fmt.Sprintf("./uploadedfiles/files/%s", filename)
+
+	// Check if the file exists
+	if _, err := os.Stat(filePath); os.IsNotExist(err) {
+		http.Error(w, "File not found", http.StatusNotFound)
+		return
+	}
+
+	http.ServeFile(w, r, filePath)
 }

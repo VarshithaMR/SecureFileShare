@@ -2,6 +2,7 @@ package routes
 
 import (
 	"net/http"
+	"strings"
 
 	"SecureFileshare/service/backend/auth"
 	"SecureFileshare/service/backend/controllers"
@@ -21,6 +22,8 @@ func Mux(controllers *controllers.Controllers, req *http.Request, uri string) ht
 	case http.MethodGet:
 		if uri == "/showfiles" {
 			return controllers.FileController.ShowFiles
+		} else if strings.HasPrefix(uri, "/download") {
+			return controllers.FileController.Download
 		}
 		return http.NotFound
 	default:
@@ -45,6 +48,11 @@ func RegisterRoutes(controllers *controllers.Controllers) {
 	})
 
 	http.HandleFunc("/showfiles", func(w http.ResponseWriter, req *http.Request) {
+		handler := Mux(controllers, req, req.URL.Path)
+		handler(w, req)
+	})
+
+	http.HandleFunc("/download", func(w http.ResponseWriter, req *http.Request) {
 		handler := Mux(controllers, req, req.URL.Path)
 		handler(w, req)
 	})

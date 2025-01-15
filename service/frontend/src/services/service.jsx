@@ -47,3 +47,21 @@ export const showUploadedFiles = async () => {
         throw new Error("Show files upload failed: " + error.message)
     }
 }
+
+// Function to download files
+export const downloadFiles = async (filename) => {
+    try {
+        const response = await axios.get(`/download?filename=${filename}`, {responseType: 'blob'})
+        console.log(response)
+        const fileBlob = response.data
+
+        // Creating a temporary download link
+        const link = document.createElement('a')
+        link.href = URL.createObjectURL(fileBlob)
+        link.download = filename
+        link.click()
+
+    } catch (error) {
+        throw new Error("Download files failed: " + error.message)
+    }
+}

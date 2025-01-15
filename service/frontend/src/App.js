@@ -6,7 +6,7 @@ import {MFA} from "./pages/MFA";
 import {FileUpload} from "./pages/Upload";
 import {ShowFiles} from "./pages/Show";
 import {Logout} from "./pages/Logout";
-import {generateMfaCode, showUploadedFiles, uploadFile, verifyMfaCodeAndLogin} from "./services/service";
+import {downloadFiles, generateMfaCode, showUploadedFiles, uploadFile, verifyMfaCodeAndLogin} from "./services/service";
 
 function App() {
     const [username, setUsername] = useState('')
@@ -76,6 +76,16 @@ function App() {
         }
     }
 
+    const handleDownloadFiles = async (filename) => {
+        try {
+            await downloadFiles(filename)
+            console.log("Download file successful")
+        } catch (error) {
+            console.error("Download file failed", error)
+        }
+    }
+
+
     const handleLogout = () => {
         localStorage.clear()
         setUsername('')
@@ -108,7 +118,7 @@ function App() {
                     {isAdminRole && (
                         <>
                             <Button name={"Show Files Uploaded"} onClick={handleShowUploadedFiles}/>
-                            {isShowFiles && <ShowFiles filesUploaded={filesUploaded}/>}
+                            {isShowFiles && <ShowFiles filesUploaded={filesUploaded} handleDownloadFile={handleDownloadFiles}/>}
                         </>
                     )}
                 </div>

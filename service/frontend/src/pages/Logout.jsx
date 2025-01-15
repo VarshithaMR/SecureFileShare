@@ -1,5 +1,7 @@
+import {Button} from "../components/Button";
+
 export const Logout = ({handleLogout}) => (
     <div>
-        <button onClick={handleLogout}>Logout</button>
+        <Button name={"Logout"} onClick={handleLogout}/>
     </div>
 )

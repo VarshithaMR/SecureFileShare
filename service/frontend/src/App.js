@@ -1,8 +1,12 @@
 import './App.css';
-import {Inputs} from "./components/Inputs";
 import {Button} from "./components/Button";
 import {useEffect, useState} from "react";
-import axios from 'axios'
+import {Login} from "./pages/Login";
+import {MFA} from "./pages/MFA";
+import {FileUpload} from "./pages/Upload";
+import {ShowFiles} from "./pages/Show";
+import {Logout} from "./pages/Logout";
+import {generateMfaCode, showUploadedFiles, uploadFile, verifyMfaCodeAndLogin} from "./services/service";
 
 function App() {
     const [username, setUsername] = useState('')
@@ -22,29 +26,28 @@ function App() {
 
     const handleLogin = async () => {
         try {
-            const response = await axios.post("/login", {password, username})
+            const response = await generateMfaCode(username, password)
             console.log(response)
-            setMFACode(response.data.code)
+            setMFACode(response.code)
             setIsCodeGenerated(true)
             localStorage.setItem("username", username)
             localStorage.setItem("password", password)
-            localStorage.setItem("mfacode", response.data.code)
+            localStorage.setItem("mfacode", response.code)
         } catch (error) {
             console.error("MFA Code generation failed", error)
         }
     }
 
-    const handleMfaSubmit = async() => {
+    const handleMfaSubmit = async () => {
         try {
-            const response = await axios.post("/verify", {
-                 mfaCode, username, password})
-            setToken(response.data.token)
+            const response = await verifyMfaCodeAndLogin(mfaCode, username, password)
+            setToken(response.token)
             setIsLoggedIn(true)
-            localStorage.setItem("authToken", response.data.token)
-            if (response.data.role === "admin") {
+            localStorage.setItem("authToken", response.token)
+            if (response.role === "admin") {
                 setAdminRole(true)
             }
-            console.log("Login successful, JWT token : ", response.data.token)
+            console.log("Login successful, JWT token : ", response.token)
         } catch (error) {
             console.error("MFA Validation failed", error)
         }
@@ -55,12 +58,7 @@ function App() {
         formData.append("file", file)
 
         try {
-            await axios.post("/upload", formData, {
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'UploadedBy': username
-                }
-            })
+            await uploadFile(file, token, username)
             console.log("File uploaded successfully!")
         } catch (error) {
             console.error("File upload failed", error)
@@ -69,8 +67,8 @@ function App() {
 
     const handleShowUploadedFiles = async () => {
         try {
-            const response = await axios.get("/showfiles")
-            setFilesUploaded(response.data)
+            const response = await showUploadedFiles()
+            setFilesUploaded(response)
             setIsShowFiles(true)
             console.log("Showing all files")
         } catch (error) {
@@ -96,54 +94,27 @@ function App() {
         <div>
             <h1>File Sharing App</h1>
             {!isLoggedIn && !isCodeGenerated && (
-                <div>
-                    <Inputs type={"text"} input={username} onchangeEvent={(e) => setUsername(e.target.value)}
-                            placeHolder={"Username"}/>
-                    <Inputs type={"password"} input={password} onchangeEvent={(e) => setPassword(e.target.value)}
-                            placeHolder={"Password"}/>
-                    <Button name={"Generate Code to login"} onClick={handleLogin}/>
-                </div>
+                <Login username={username} setUsername={setUsername} password={password} setPassword={setPassword}
+                       handleLogin={handleLogin}/>
             )}
 
             {!isLoggedIn && isCodeGenerated && (
-                <div>
-                    <p>Your MFA code is: <strong>{mfaCode}</strong></p>
-                    <Inputs type={"text"} id={"mfaCodeInput"} placeHolder={"Enter code"}/>
-                    <Button name={"Submit"} onClick={handleMfaSubmit}/>
-                </div>
+                <MFA mfaCode={mfaCode} handleMfaSubmit={handleMfaSubmit}/>
             )}
 
-            {isLoggedIn && isCodeGenerated  &&(
+            {isLoggedIn && isCodeGenerated && (
                 <div>
-                    <Inputs type={"file"} onchangeEvent={(e) => setFile(e.target.files[0])}/>
-                    <Button name={"Upload File"} onClick={handleFileUpload}/>
+                    <FileUpload handleFileUpload={handleFileUpload} setFile={setFile}/>
                     {isAdminRole && (
                         <>
                             <Button name={"Show Files Uploaded"} onClick={handleShowUploadedFiles}/>
-                            {isShowFiles && (<div>
-                                <h3>Uploaded Files</h3>
-                                {filesUploaded.length === 0 ? (
-                                    <p>No files uploaded yet.</p>
-                                ) : (
-                                    <ul>
-                                        {filesUploaded.map((filename, index) => (
-                                            <li key={index}>
-                                                <strong>{filename.filename}:{filename.username}</strong>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
-                            </div>)}
+                            {isShowFiles && <ShowFiles filesUploaded={filesUploaded}/>}
                         </>
                     )}
                 </div>
             )}
 
-            {isLoggedIn && (
-                <div>
-                    <button onClick={handleLogout}>Logout</button>
-                </div>
-            )}
+            {isLoggedIn && <Logout handleLogout={handleLogout}/>}
 
         </div>
     )

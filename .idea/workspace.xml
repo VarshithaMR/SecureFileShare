@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53843825-2c33-4f5a-9d0c-3e7d187b1f8b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/backend/controllers/file.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/backend/controllers/file.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/backend/controllers/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/backend/controllers/user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/backend/routes/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/backend/routes/routes.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/service/frontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploadedfiles/b7edde53-e26e-4fa0-8ff6-1290c98f1b59.pdf" beforeDir="false" />
-    </list>
+    <list default="true" id="53843825-2c33-4f5a-9d0c-3e7d187b1f8b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -169,7 +162,7 @@
       <workItem from="1736917889726" duration="7964000" />
       <workItem from="1736929068252" duration="1703000" />
       <workItem from="1736930782323" duration="1016000" />
-      <workItem from="1736931808583" duration="16736000" />
+      <workItem from="1736931808583" duration="17085000" />
     </task>
     <servers />
   </component>

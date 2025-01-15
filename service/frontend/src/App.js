@@ -78,6 +78,20 @@ function App() {
         }
     }
 
+    const handleLogout = () => {
+        localStorage.clear()
+        setUsername('')
+        setPassword('')
+        setToken('')
+        setIsCodeGenerated(false)
+        setIsLoggedIn(false)
+        setFile(null)
+        setMFACode('')
+        setAdminRole(false)
+        setFilesUploaded('')
+        setIsShowFiles(false)
+    }
+
     return (
         <div>
             <h1>File Sharing App</h1>
@@ -124,6 +138,13 @@ function App() {
                     )}
                 </div>
             )}
+
+            {isLoggedIn && (
+                <div>
+                    <button onClick={handleLogout}>Logout</button>
+                </div>
+            )}
+
         </div>
     )
 }

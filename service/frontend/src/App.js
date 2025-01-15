@@ -8,12 +8,16 @@ function App() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [token, setToken] = useState('')
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [file, setFile] = useState(null)
 
     const handleLogin = async () => {
         try {
             const response = await axios.post('/login', { password, username })
+            localStorage.setItem('authToken', response.data.token);
             setToken(response.data.token);
+            setIsLoggedIn(true)
+            console.log("Login successful, JWT token : ", response.data.token)
         } catch (error) {
             console.error('Login failed', error);
         }
@@ -38,16 +42,22 @@ function App() {
   return (
       <div>
         <h1>File Sharing App</h1>
-        <div>
-          <Inputs type={"text"} input={username}  onchangeEvent={(e) => setUsername(e.target.value)} placeHolder={"Username"}/>
-          <Inputs type={"password"} input={password}  onchangeEvent={(e) => setPassword(e.target.value)} placeHolder={"Password"}/>
-          <Button name={"Login"} onClick={handleLogin}/>
-        </div>
+          {!isLoggedIn && (
+              <div>
+                  <Inputs type={"text"} input={username} onchangeEvent={(e) => setUsername(e.target.value)}
+                          placeHolder={"Username"}/>
+                  <Inputs type={"password"} input={password} onchangeEvent={(e) => setPassword(e.target.value)}
+                          placeHolder={"Password"}/>
+                  <Button name={"Login"} onClick={handleLogin}/>
+              </div>
+          )}
 
-        <div>
-          <Inputs input={file} type={"file"} onchangeEvent={(e) => setFile(e.target.files[0])}/>
-          <Button name={"Upload File"} onClick={handleFileUpload}/>
-        </div>
+          {isLoggedIn && (
+              <div>
+                  <Inputs input={file} type={"file"} onchangeEvent={(e) => setFile(e.target.files[0])}/>
+                  <Button name={"Upload File"} onClick={handleFileUpload}/>
+              </div>
+          )}
       </div>
   );
 }

@@ -3,6 +3,7 @@ package routes
 import (
 	"net/http"
 
+	"SecureFileshare/service/backend/auth"
 	"SecureFileshare/service/backend/controllers"
 )
 
@@ -12,7 +13,7 @@ func Mux(controllers *controllers.Controllers, req *http.Request, theURI string)
 		if theURI == "/login" {
 			return controllers.UserController.Login
 		} else if theURI == "/upload" {
-			return controllers.FileController.Upload
+			return validateJWTAndHandle(controllers.FileController.Upload)
 		}
 		return http.NotFound
 	default:
@@ -30,4 +31,14 @@ func RegisterRoutes(controllers *controllers.Controllers) {
 		handler := Mux(controllers, req, req.URL.Path)
 		handler(w, req)
 	})
+}
+
+func validateJWTAndHandle(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		_, err := auth.ValidateJWT(w, r)
+		if err != nil {
+			return
+		}
+		next(w, r)
+	}
 }

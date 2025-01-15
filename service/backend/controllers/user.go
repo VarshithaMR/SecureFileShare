@@ -1,11 +1,12 @@
 package controllers
 
 import (
-	"SecureFileshare/service/backend/auth"
-	"SecureFileshare/service/backend/utils"
 	"encoding/json"
 	"fmt"
 	"net/http"
+
+	"SecureFileshare/service/backend/auth"
+	"SecureFileshare/service/backend/utils"
 )
 
 type UserController struct{}
@@ -51,4 +52,12 @@ func (uc *UserController) Login(w http.ResponseWriter, r *http.Request) {
 	// Respond with the JWT token
 	w.Header().Set("Content-Type", "application/json")
 	_ = json.NewEncoder(w).Encode(map[string]string{"token": token})
+}
+
+func (uc *UserController) ProfileHandler(w http.ResponseWriter, r *http.Request) {
+	_, err := auth.ValidateJWT(w, r)
+	if err != nil {
+		return
+	}
+	w.Write([]byte("Welcome to your profile"))
 }

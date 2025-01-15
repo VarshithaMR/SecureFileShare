@@ -12,7 +12,7 @@ function App() {
 
     const handleLogin = async () => {
         try {
-            const response = await axios.post('http://localhost:8080/login', { password, username })
+            const response = await axios.post('/login', { password, username })
             setToken(response.data.token);
         } catch (error) {
             console.error('Login failed', error);

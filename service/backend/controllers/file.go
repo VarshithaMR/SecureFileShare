@@ -43,7 +43,7 @@ func (fc *FileController) Upload(w http.ResponseWriter, r *http.Request) {
 	defer func(dst *os.File) {
 		err := dst.Close()
 		if err != nil {
-			
+
 		}
 	}(dst)
 
@@ -53,7 +53,7 @@ func (fc *FileController) Upload(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_, err = fmt.Fprintf(w, "File uploaded successfully!")
+	_, err = fmt.Println("File uploaded successfully!")
 	if err != nil {
 		return
 	}

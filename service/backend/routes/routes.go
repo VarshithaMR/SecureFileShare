@@ -6,12 +6,7 @@ import (
 	"SecureFileshare/service/backend/controllers"
 )
 
-type Controllers struct {
-	UserController *controllers.UserController
-	FileController *controllers.FileController
-}
-
-func Mux(controllers Controllers, req *http.Request, theURI string) http.HandlerFunc {
+func Mux(controllers *controllers.Controllers, req *http.Request, theURI string) http.HandlerFunc {
 	switch req.Method {
 	case http.MethodPost:
 		if theURI == "/login" {
@@ -25,7 +20,7 @@ func Mux(controllers Controllers, req *http.Request, theURI string) http.Handler
 	}
 }
 
-func RegisterRoutes(controllers Controllers) {
+func RegisterRoutes(controllers *controllers.Controllers) {
 	http.HandleFunc("/login", func(w http.ResponseWriter, req *http.Request) {
 		handler := Mux(controllers, req, req.URL.Path)
 		handler(w, req)

@@ -1,0 +1,7 @@
+server:
+  host: 'localhost'
+  port: 8080
+  contextroot: '/securefileshare'
+
+auth:
+  secret:'secretKey'

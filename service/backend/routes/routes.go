@@ -7,12 +7,14 @@ import (
 	"SecureFileshare/service/backend/controllers"
 )
 
-func Mux(controllers *controllers.Controllers, req *http.Request, theURI string) http.HandlerFunc {
+func Mux(controllers *controllers.Controllers, req *http.Request, uri string) http.HandlerFunc {
 	switch req.Method {
 	case http.MethodPost:
-		if theURI == "/login" {
+		if uri == "/login" {
 			return controllers.UserController.Login
-		} else if theURI == "/upload" {
+		} else if uri == "/verify" {
+			return controllers.UserController.Verify
+		} else if uri == "/upload" {
 			return validateJWTAndHandle(controllers.FileController.Upload)
 		}
 		return http.NotFound
@@ -23,6 +25,11 @@ func Mux(controllers *controllers.Controllers, req *http.Request, theURI string)
 
 func RegisterRoutes(controllers *controllers.Controllers) {
 	http.HandleFunc("/login", func(w http.ResponseWriter, req *http.Request) {
+		handler := Mux(controllers, req, req.URL.Path)
+		handler(w, req)
+	})
+
+	http.HandleFunc("/verify", func(w http.ResponseWriter, req *http.Request) {
 		handler := Mux(controllers, req, req.URL.Path)
 		handler(w, req)
 	})

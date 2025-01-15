@@ -6,9 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="53843825-2c33-4f5a-9d0c-3e7d187b1f8b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/backend/auth/jwt.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/backend/auth/jwt.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/backend/controllers/file.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/backend/controllers/file.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/backend/controllers/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/backend/controllers/user.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/backend/routes/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/backend/routes/routes.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/service/frontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploadedfiles/b7edde53-e26e-4fa0-8ff6-1290c98f1b59.pdf" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,30 +41,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
-    &quot;Go Build.go build SecureFileshare/cmd.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/VARSHIM/go/src/SecureFileshare&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.build (1).executor&quot;: &quot;Run&quot;,
-    &quot;npm.build.executor&quot;: &quot;Run&quot;,
-    &quot;npm.start.executor&quot;: &quot;Run&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultGoTemplateProperty": "Go File",
+    "Go Build.go build SecureFileshare/cmd.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "git-widget-placeholder": "master",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/VARSHIM/go/src/SecureFileshare",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.build (1).executor": "Run",
+    "npm.build.executor": "Run",
+    "npm.start.executor": "Run",
+    "ts.external.directory.path": "/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/service/frontend/src" />
@@ -75,7 +78,7 @@
       <recent name="$PROJECT_DIR$/backened/models" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build SecureFileshare/cmd">
+  <component name="RunManager" selected="npm.start">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="SecureFileShare" />
       <working_directory value="$PROJECT_DIR$" />
@@ -136,8 +139,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build SecureFileshare/cmd" />
         <item itemvalue="npm.start" />
+        <item itemvalue="Go Build.go build SecureFileshare/cmd" />
         <item itemvalue="npm.build (1)" />
         <item itemvalue="npm.build" />
       </list>
@@ -166,6 +169,7 @@
       <workItem from="1736917889726" duration="7964000" />
       <workItem from="1736929068252" duration="1703000" />
       <workItem from="1736930782323" duration="1016000" />
+      <workItem from="1736931808583" duration="16736000" />
     </task>
     <servers />
   </component>
@@ -183,16 +187,6 @@
           <url>file://$PROJECT_DIR$/cmd/main.go</url>
           <line>17</line>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/service/backend/controllers/user.go</url>
-          <line>18</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/service/backend/routes/routes.go</url>
-          <line>12</line>
-          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

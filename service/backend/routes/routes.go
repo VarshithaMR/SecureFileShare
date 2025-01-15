@@ -18,6 +18,11 @@ func Mux(controllers *controllers.Controllers, req *http.Request, uri string) ht
 			return validateJWTAndHandle(controllers.FileController.Upload)
 		}
 		return http.NotFound
+	case http.MethodGet:
+		if uri == "/showfiles" {
+			return controllers.FileController.ShowFiles
+		}
+		return http.NotFound
 	default:
 		return http.NotFound
 	}
@@ -35,6 +40,11 @@ func RegisterRoutes(controllers *controllers.Controllers) {
 	})
 
 	http.HandleFunc("/upload", func(w http.ResponseWriter, req *http.Request) {
+		handler := Mux(controllers, req, req.URL.Path)
+		handler(w, req)
+	})
+
+	http.HandleFunc("/showfiles", func(w http.ResponseWriter, req *http.Request) {
 		handler := Mux(controllers, req, req.URL.Path)
 		handler(w, req)
 	})

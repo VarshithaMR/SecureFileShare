@@ -88,5 +88,5 @@ func (uc *UserController) Verify(w http.ResponseWriter, r *http.Request) {
 
 	// Respond with the JWT token
 	w.Header().Set("Content-Type", "application/json")
-	_ = json.NewEncoder(w).Encode(map[string]string{"token": token})
+	_ = json.NewEncoder(w).Encode(map[string]string{"token": token, "role": user.Role})
 }

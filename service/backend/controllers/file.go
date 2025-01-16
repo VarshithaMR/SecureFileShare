@@ -170,3 +170,83 @@ func (fc *FileController) Download(w http.ResponseWriter, r *http.Request) {
 
 	http.ServeFile(w, r, decryptedFilePath)
 }
+
+func (fc *FileController) DeleteFiles(w http.ResponseWriter, r *http.Request) {
+	filename := r.URL.Query().Get("filename")
+	if filename == "" {
+		http.Error(w, "Filename is required", http.StatusBadRequest)
+		return
+	}
+
+	// Define the file path (assuming files are in the 'uploadedfiles' folder)
+	filePath := filepath.Join("./uploadedfiles/files", filename)
+
+	// Check if the file exists
+	if _, err := os.Stat(filePath); os.IsNotExist(err) {
+		http.Error(w, "File not found", http.StatusNotFound)
+		return
+	}
+
+	// Delete the file from the filesystem
+	err := os.Remove(filePath)
+	if err != nil {
+		http.Error(w, "Failed to delete file", http.StatusInternalServerError)
+		return
+	}
+
+	// Optionally: Remove the file record from your uploads JSON (if necessary)
+	err = deleteFileRecord(filename)
+	if err != nil {
+		http.Error(w, "Failed to update file records", http.StatusInternalServerError)
+		return
+	}
+
+	// Return a success message
+	w.Header().Set("Content-Type", "application/json")
+	response := map[string]string{
+		"message": "File deleted successfully",
+	}
+	_ = json.NewEncoder(w).Encode(response)
+}
+
+func deleteFileRecord(filename string) error {
+	// Load existing file records
+	var records []FileUploadRecord
+	recordsFile := "./uploadedfiles/uploads.json"
+
+	file, err := os.Open(recordsFile)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	decoder := json.NewDecoder(file)
+	err = decoder.Decode(&records)
+	if err != nil {
+		return err
+	}
+
+	// Find and remove the record for the deleted file
+	var updatedRecords []FileUploadRecord
+	for _, record := range records {
+		if record.Filename != filename {
+			updatedRecords = append(updatedRecords, record)
+		}
+	}
+
+	// Save the updated records back to the file
+	newFile, err := os.Create(recordsFile)
+	if err != nil {
+		return err
+	}
+	defer newFile.Close()
+
+	encoder := json.NewEncoder(newFile)
+	encoder.SetIndent("", "  ")
+	err = encoder.Encode(updatedRecords)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

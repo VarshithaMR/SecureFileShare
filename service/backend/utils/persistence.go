@@ -53,6 +53,13 @@ func ExistingUsers(username string) *models.User {
 			Role:      "admin",
 			MFASecret: "admin1_mfa_secret",
 		},
+		"admin2": {
+			ID:        8,
+			Username:  "admin2",
+			Password:  "admin2@123",
+			Role:      "super_admin",
+			MFASecret: "admin2_mfa_secret",
+		},
 	}
 
 	value, ok := users[username]

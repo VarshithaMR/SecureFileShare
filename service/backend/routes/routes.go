@@ -26,6 +26,12 @@ func Mux(controllers *controllers.Controllers, req *http.Request, uri string) ht
 			return controllers.FileController.Download
 		}
 		return http.NotFound
+
+	case http.MethodDelete:
+		if uri == "/delete" {
+			return checkRoleToDelete(controllers.FileController.DeleteFiles)
+		}
+		return http.NotFound
 	default:
 		return http.NotFound
 	}
@@ -56,6 +62,11 @@ func RegisterRoutes(controllers *controllers.Controllers) {
 		handler := Mux(controllers, req, req.URL.Path)
 		handler(w, req)
 	})
+
+	http.HandleFunc("/delete", func(w http.ResponseWriter, req *http.Request) {
+		handler := Mux(controllers, req, req.URL.Path)
+		handler(w, req)
+	})
 }
 
 func validateJWTAndHandle(next http.HandlerFunc) http.HandlerFunc {
@@ -64,6 +75,22 @@ func validateJWTAndHandle(next http.HandlerFunc) http.HandlerFunc {
 		if err != nil {
 			return
 		}
+
+		next(w, r)
+	}
+}
+
+func checkRoleToDelete(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		role, err := auth.ExtractRoleFromJWT(r)
+		if err != nil {
+			return
+		}
+		if role != "super_admin" {
+			http.Error(w, "Access denied: insufficient permissions", http.StatusForbidden)
+			return
+		}
+
 		next(w, r)
 	}
 }

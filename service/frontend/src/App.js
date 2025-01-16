@@ -6,7 +6,14 @@ import {MFA} from "./pages/MFA";
 import {FileUpload} from "./pages/Upload";
 import {ShowFiles} from "./pages/Show";
 import {Logout} from "./pages/Logout";
-import {downloadFiles, generateMfaCode, showUploadedFiles, uploadFile, verifyMfaCodeAndLogin} from "./services/service";
+import {
+    deleteFiles,
+    downloadFiles,
+    generateMfaCode,
+    showUploadedFiles,
+    uploadFile,
+    verifyMfaCodeAndLogin
+} from "./services/service";
 
 function App() {
     const [username, setUsername] = useState('')
@@ -44,7 +51,7 @@ function App() {
             setToken(response.token)
             setIsLoggedIn(true)
             localStorage.setItem("authToken", response.token)
-            if (response.role === "admin") {
+            if (response.role === "admin" || response.role === "super_admin") {
                 setAdminRole(true)
             }
             console.log("Login successful, JWT token : ", response.token)
@@ -85,6 +92,16 @@ function App() {
         }
     }
 
+    const handleDeleteFiles = async (filename) => {
+        if (window.confirm("Are you sure you want to delete this file?")) {
+            try {
+                await deleteFiles(filename)
+                setFilesUploaded((prevFiles) => prevFiles.filter(file => file.filename !== filename))
+            } catch (error) {
+                console.error("Delete file failed", error)
+            }
+        }
+    }
 
     const handleLogout = () => {
         localStorage.clear()
@@ -118,7 +135,7 @@ function App() {
                     {isAdminRole && (
                         <>
                             <Button name={"Show Files Uploaded"} onClick={handleShowUploadedFiles}/>
-                            {isShowFiles && <ShowFiles filesUploaded={filesUploaded} handleDownloadFile={handleDownloadFiles}/>}
+                            {isShowFiles && <ShowFiles filesUploaded={filesUploaded} handleDownloadFile={handleDownloadFiles} handleDeleteFile={handleDeleteFiles}/>}
                         </>
                     )}
                 </div>

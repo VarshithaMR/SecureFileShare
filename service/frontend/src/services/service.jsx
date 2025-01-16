@@ -65,3 +65,13 @@ export const downloadFiles = async (filename) => {
         throw new Error("Download files failed: " + error.message)
     }
 }
+
+// Function to delete files
+export const deleteFiles = async (filename) => {
+    try {
+        const response = await axios.delete(`/delete`, {data: { filename }})
+        console.log("File deleted successfully:", response.data)
+    } catch (error) {
+        throw new Error("Delete files failed: " + error.message)
+    }
+}

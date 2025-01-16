@@ -61,3 +61,34 @@ func ValidateJWT(w http.ResponseWriter, r *http.Request) (*twj.Token, error) {
 		return nil, fmt.Errorf("invalid token")
 	}
 }
+
+func ExtractRoleFromJWT(r *http.Request) (string, error) {
+	tokenString := r.Header.Get("Authorization")
+	if tokenString == "" {
+		return "", fmt.Errorf("missing token")
+	}
+
+	// Parse the token to get the claims
+	token, err := twj.Parse(tokenString, func(token *twj.Token) (interface{}, error) {
+		if _, ok := token.Method.(*twj.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("unexpected signing method")
+		}
+		return jwtKey, nil
+	})
+
+	if err != nil || !token.Valid {
+		return "", fmt.Errorf("invalid token")
+	}
+
+	claims, ok := token.Claims.(twj.MapClaims)
+	if !ok || !token.Valid {
+		return "", fmt.Errorf("invalid token claims")
+	}
+
+	role, ok := claims["role"].(string)
+	if !ok {
+		return "", fmt.Errorf("role not found in token claims")
+	}
+
+	return role, nil
+}

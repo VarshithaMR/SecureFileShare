@@ -9,7 +9,11 @@ import (
 	"path/filepath"
 
 	"github.com/google/uuid"
+
+	"SecureFileshare/service/backend/auth"
 )
+
+var secretKey = []byte("mysecretkey12345") // 16 bytes for AES-128
 
 type FileController struct{}
 
@@ -53,10 +57,26 @@ func (fc *FileController) Upload(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Encrypt the file after it is uploaded
+	encryptedFilePath := "./uploadedfiles/files/encrypted_" + fileName + fileExt
+
+	err = auth.EncryptFile(filePath, encryptedFilePath, secretKey)
+	if err != nil {
+		http.Error(w, "Error encrypting file", http.StatusInternalServerError)
+		return
+	}
+
+	// Remove the unencrypted file after encryption
+	err = os.Remove(filePath)
+	if err != nil {
+		http.Error(w, "Error removing unencrypted file", http.StatusInternalServerError)
+		return
+	}
+
 	username := r.Header.Get("UploadedBy")
 	record := FileUploadRecord{
 		Username: username,
-		Filename: fileName + fileExt,
+		Filename: "encrypted_" + fileName + fileExt,
 	}
 
 	var records []FileUploadRecord
@@ -138,5 +158,15 @@ func (fc *FileController) Download(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	http.ServeFile(w, r, filePath)
+	// Decrypt the file before sending it to the user
+	decryptedFilePath := "./uploadedfiles/files/decrypted_" + filename
+	defer os.Remove(decryptedFilePath)
+
+	err := auth.DecryptFile(filePath, decryptedFilePath, secretKey)
+	if err != nil {
+		http.Error(w, "Error decrypting file", http.StatusInternalServerError)
+		return
+	}
+
+	http.ServeFile(w, r, decryptedFilePath)
 }

@@ -6,18 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="53843825-2c33-4f5a-9d0c-3e7d187b1f8b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/backend/controllers/file.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/backend/controllers/file.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/backend/routes/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/backend/routes/routes.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/service/frontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/frontend/src/pages/Logout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/service/frontend/src/pages/Logout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/frontend/src/pages/Show.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/service/frontend/src/pages/Show.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/frontend/src/services/service.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/service/frontend/src/services/service.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploadedfiles/24793fb5-7728-48a7-955e-e4265ea7e5b8.docx" beforeDir="false" afterPath="$PROJECT_DIR$/uploadedfiles/files/24793fb5-7728-48a7-955e-e4265ea7e5b8.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploadedfiles/6637bafb-a47e-47bb-bc9f-0854536ce6ae.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/uploadedfiles/files/6637bafb-a47e-47bb-bc9f-0854536ce6ae.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploadedfiles/7cfc932f-fe88-43c3-a2e5-c1ca54a09c4f.docx" beforeDir="false" afterPath="$PROJECT_DIR$/uploadedfiles/files/7cfc932f-fe88-43c3-a2e5-c1ca54a09c4f.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploadedfiles/8ef38f37-e3ec-449e-8f55-5f1d3057291b.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/uploadedfiles/files/8ef38f37-e3ec-449e-8f55-5f1d3057291b.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploadedfiles/a6d6721d-930a-4357-ad65-9ce61bffdce7.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/uploadedfiles/files/a6d6721d-930a-4357-ad65-9ce61bffdce7.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploadedfiles/c76f34bb-b791-45f3-8fbb-3ccbef3ed725.docx" beforeDir="false" afterPath="$PROJECT_DIR$/uploadedfiles/files/c76f34bb-b791-45f3-8fbb-3ccbef3ed725.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploadedfiles/files/24793fb5-7728-48a7-955e-e4265ea7e5b8.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploadedfiles/files/6637bafb-a47e-47bb-bc9f-0854536ce6ae.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploadedfiles/files/7cfc932f-fe88-43c3-a2e5-c1ca54a09c4f.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploadedfiles/files/8ef38f37-e3ec-449e-8f55-5f1d3057291b.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploadedfiles/files/a6d6721d-930a-4357-ad65-9ce61bffdce7.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploadedfiles/files/c76f34bb-b791-45f3-8fbb-3ccbef3ed725.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploadedfiles/uploads.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +81,7 @@
       <recent name="$PROJECT_DIR$/backened/models" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.start">
+  <component name="RunManager" selected="Go Build.go build SecureFileshare/cmd">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="SecureFileShare" />
       <working_directory value="$PROJECT_DIR$" />
@@ -147,8 +142,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.start" />
         <item itemvalue="Go Build.go build SecureFileshare/cmd" />
+        <item itemvalue="npm.start" />
         <item itemvalue="npm.build (1)" />
         <item itemvalue="npm.build" />
       </list>
@@ -177,7 +172,7 @@
       <workItem from="1736917889726" duration="7964000" />
       <workItem from="1736929068252" duration="1703000" />
       <workItem from="1736930782323" duration="1016000" />
-      <workItem from="1736931808583" duration="22934000" />
+      <workItem from="1736931808583" duration="25409000" />
     </task>
     <servers />
   </component>
@@ -198,23 +193,38 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/service/backend/controllers/file.go</url>
-          <line>131</line>
-          <option name="timeStamp" value="33" />
+          <line>57</line>
+          <option name="timeStamp" value="45" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/service/backend/controllers/file.go</url>
-          <line>132</line>
-          <option name="timeStamp" value="34" />
+          <line>83</line>
+          <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/service/backend/controllers/file.go</url>
-          <line>135</line>
-          <option name="timeStamp" value="35" />
+          <line>151</line>
+          <option name="timeStamp" value="54" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/service/backend/controllers/file.go</url>
-          <line>136</line>
-          <option name="timeStamp" value="36" />
+          <line>152</line>
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/service/backend/controllers/file.go</url>
+          <line>155</line>
+          <option name="timeStamp" value="56" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/service/backend/controllers/file.go</url>
+          <line>111</line>
+          <option name="timeStamp" value="57" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/service/backend/controllers/file.go</url>
+          <line>112</line>
+          <option name="timeStamp" value="58" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/service/frontend/src/services/service.jsx</url>

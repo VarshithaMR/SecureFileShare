@@ -95,7 +95,7 @@ function App() {
     const handleDeleteFiles = async (filename) => {
         if (window.confirm("Are you sure you want to delete this file?")) {
             try {
-                await deleteFiles(filename)
+                await deleteFiles(filename, token)
                 setFilesUploaded((prevFiles) => prevFiles.filter(file => file.filename !== filename))
             } catch (error) {
                 console.error("Delete file failed", error)

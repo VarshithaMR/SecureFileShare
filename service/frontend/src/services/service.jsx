@@ -67,11 +67,17 @@ export const downloadFiles = async (filename) => {
 }
 
 // Function to delete files
-export const deleteFiles = async (filename) => {
+export const deleteFiles = async (filename, token) => {
     try {
-        const response = await axios.delete(`/delete`, {data: { filename }})
+        const response = await axios.delete(`/delete`, {
+            headers: {
+                Authorization: `${token}`
+            },
+            data: { filename }
+        })
         console.log("File deleted successfully:", response.data)
     } catch (error) {
+        alert("You should be Super Admin to delete")
         throw new Error("Delete files failed: " + error.message)
     }
 }

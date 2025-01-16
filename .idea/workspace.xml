@@ -6,10 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="53843825-2c33-4f5a-9d0c-3e7d187b1f8b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/backend/auth/jwt.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/backend/auth/jwt.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/backend/controllers/file.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/backend/controllers/file.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/backend/routes/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/backend/routes/routes.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/backend/utils/persistence.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/backend/utils/persistence.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/service/frontend/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/frontend/src/services/service.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/service/frontend/src/services/service.jsx" afterDir="false" />
     </list>
@@ -80,7 +76,7 @@
       <recent name="$PROJECT_DIR$/backened/models" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build SecureFileshare/cmd">
+  <component name="RunManager" selected="npm.start">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="SecureFileShare" />
       <working_directory value="$PROJECT_DIR$" />
@@ -141,8 +137,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build SecureFileshare/cmd" />
         <item itemvalue="npm.start" />
+        <item itemvalue="Go Build.go build SecureFileshare/cmd" />
         <item itemvalue="npm.build (1)" />
         <item itemvalue="npm.build" />
       </list>
@@ -171,7 +167,7 @@
       <workItem from="1736917889726" duration="7964000" />
       <workItem from="1736929068252" duration="1703000" />
       <workItem from="1736930782323" duration="1016000" />
-      <workItem from="1736931808583" duration="29379000" />
+      <workItem from="1736931808583" duration="30416000" />
     </task>
     <servers />
   </component>
@@ -194,6 +190,31 @@
           <url>file://$PROJECT_DIR$/service/backend/controllers/file.go</url>
           <line>57</line>
           <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/service/backend/controllers/file.go</url>
+          <line>174</line>
+          <option name="timeStamp" value="59" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/service/backend/routes/routes.go</url>
+          <line>31</line>
+          <option name="timeStamp" value="61" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/service/backend/routes/routes.go</url>
+          <line>88</line>
+          <option name="timeStamp" value="63" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/service/backend/routes/routes.go</url>
+          <line>84</line>
+          <option name="timeStamp" value="64" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/service/backend/routes/routes.go</url>
+          <line>85</line>
+          <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/service/frontend/src/services/service.jsx</url>
